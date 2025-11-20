@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Implementation of the POS service that handles business logic related to POS entities.
@@ -48,7 +49,12 @@ public class PosServiceImpl implements PosService {
         return posDataService.getById(id);
     }
 
-    // TODO: Implement getByName after adding it to the PosService interface. Note that the PosDataService already supports filtering by name.
+    // TODONE: Implement getByName after adding it to the PosService interface. Note that the PosDataService already supports filtering by name.
+    @Override
+    public Optional<Pos> getByName(@NonNull String name) {
+        log.debug("Retrieving POS with name: {}", name);
+        return posDataService.getByName(name);
+    }
 
     @Override
     public @NonNull Pos upsert(@NonNull Pos pos) throws PosNotFoundException {

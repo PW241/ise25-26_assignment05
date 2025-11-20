@@ -42,7 +42,14 @@ public class PosController {
         );
     }
 
-    // TODO: Implement a new GET endpoint that supports filtering POS by name, e.g., /filter?name=Schmelzpunkt
+    // TODONE: Implement a new GET endpoint that supports filtering POS by name, e.g., /filter?name=Schmelzpunkt
+    @GetMapping("/filter")
+    public ResponseEntity<PosDto> getByName(@RequestParam String name) {
+        return posService.getByName(name)
+                .map(posDtoMapper::fromDomain)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
     @PostMapping("")
     public ResponseEntity<PosDto> create(
